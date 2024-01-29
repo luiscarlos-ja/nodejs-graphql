@@ -1,0 +1,36 @@
+{
+  "name": "graphql-server",
+  "version": "1.0.0",
+  "description": "GraphQL Server for Testing",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node -r dotenv/config ./index.js ",
+    "json-server": "json-server --watch db.json --port 3001",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "graphql-server"
+  },
+  "author": "luiscarlos-ja",
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/server": "^4.10.0",
+    "@graphql-tools/schema": "^10.0.2",
+    "axios": "^1.6.5",
+    "dotenv": "^16.4.1",
+    "express": "^4.18.2",
+    "graphql": "^16.8.1",
+    "graphql-subscriptions": "^2.0.0",
+    "graphql-tag": "^2.12.6",
+    "graphql-ws": "^5.14.3",
+    "json-server": "^1.0.0-alpha.22",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.3.0",
+    "mongoose": "7.6.8",
+    "mongoose-unique-validator": "4.0.0",
+    "uuid": "^9.0.1",
+    "ws": "^8.16.0"
+  }
+}
