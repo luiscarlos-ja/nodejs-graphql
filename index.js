@@ -124,8 +124,6 @@ const resolvers = {
           extensions: { code: ApolloServerErrorCode.UNAUTHENTICATED },
         });
       }
-      const person = new Person({ ...args });
-      pubsub.publish(SUBSCRIPTION_EVENTS.PERSON_ADDED, { personAdded: person });
       try {
         await person.save();
         currentUser.friends = currentUser.friends.concat(person);
@@ -135,6 +133,8 @@ const resolvers = {
           extensions: { code: ApolloServerErrorCode.BAD_USER_INPUT },
         });
       }
+      const person = new Person({ ...args });
+      pubsub.publish(SUBSCRIPTION_EVENTS.PERSON_ADDED, { personAdded: person });
       return person;
     },
     editNumber: async (root, args) => {
