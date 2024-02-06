@@ -17,6 +17,7 @@ import "./db.js";
 import Person from "./models/person.js";
 import User from "./models/user.js";
 import jwt from "jsonwebtoken";
+import { typeDefs } from "./schema.js";
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -25,77 +26,6 @@ const pubsub = new PubSub();
 const SUBSCRIPTION_EVENTS = {
   PERSON_ADDED: "PERSON_ADDED",
 };
-
-const typeDefinitions = `#graphql
-    enum YesNo {
-        YES
-        NO
-    }
-
-    type Address {
-        street: String!
-        city: String!
-    }
-
-    type Person {
-        name: String!
-        phone: String
-        address: Address!
-        id: ID!
-    }
-
-    type User {
-        username: String!
-        friends: [Person]!
-        id: ID!
-    }
-
-    type Token {
-        value: String!
-    }
-
-    type PersonREST {
-        name: String!
-        id: ID!
-        email: String!
-    }
-
-    type Query {
-        personCount: Int!
-        allPersons(phone: YesNo): [Person]!
-        findPerson(name: String!): Person
-        allPersonsREST: [PersonREST]!
-        me: User
-    }
-
-    type Mutation {
-        addPerson(
-            name: String!
-            phone: String
-            street: String!
-            city: String!
-        ): Person
-        editNumber(
-            name: String!
-            phone: String!
-        ): Person
-        createUser(
-            username: String!
-        ): User
-        login(
-            username: String!
-            password: String!
-        ): Token
-        addAsFriend(
-            name: String!
-        ): User
-
-    }
-
-    type Subscription {
-        personAdded: Person!
-    }
-`;
 
 const resolvers = {
   Query: {
@@ -208,7 +138,7 @@ const resolvers = {
 // Create the schema, which will be used separately by ApolloServer and
 // the WebSocket server.
 const schema = makeExecutableSchema({
-  typeDefs: typeDefinitions,
+  typeDefs,
   resolvers,
 });
 
